@@ -1,0 +1,32 @@
+{
+  "model_type": "Logistic Regression (TF-IDF)",
+  "accuracy": 77.83,
+  "dataset_name": "Twitter Entity Sentiment Analysis (twitter_training.csv)",
+  "total_samples": 69611,
+  "vocab_size": 20000,
+  "ngram_range": [
+    1,
+    2
+  ],
+  "classes": [
+    "Irrelevant",
+    "Negative",
+    "Neutral",
+    "Positive"
+  ],
+  "class_mapping": {
+    "Irrelevant": 0,
+    "Negative": 1,
+    "Neutral": 2,
+    "Positive": 3
+  },
+  "preprocessing_steps": [
+    "Lowercase conversion",
+    "URL removal (http/https/www)",
+    "User mention removal (@username)",
+    "Hashtag symbol strip (retaining hashtag text)",
+    "Punctuation & digit removal",
+    "Whitespace collapse & trimming"
+  ],
+  "trained_at": "2026-09-16 20:37:15"
+}

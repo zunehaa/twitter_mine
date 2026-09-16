@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentix AI — Twitter Sentiment Intelligence</title>
+    <meta name="description" content="Sentix AI analyzes Twitter comments using a trained machine-learning model to classify sentiment as Positive, Negative, Neutral, or Irrelevant.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#38bdf8"/>
+                                <stop offset="1" stop-color="#818cf8"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">Sentix<span class="brand-accent">AI</span></span>
+                    <span class="brand-subtitle">Twitter Intelligence</span>
+                </div>
+            </a>
+
+            <div class="nav-status-badge">
+                <span class="status-pulse"></span>
+                <span class="status-text" id="model-status-text">Model Ready</span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#analyzer" class="nav-link">Analyzer</a></li>
+                <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                <li><a href="#about-model" class="nav-link">About Model</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+            </ul>
+
+            <a href="#analyzer" class="btn btn-primary btn-sm nav-cta">Analyze Now</a>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" id="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge-pill">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        Trained Machine Learning Model
+                    </div>
+                    <h1 class="hero-title">Understand the Emotion Behind Every Tweet.</h1>
+                    <p class="hero-subtitle">
+                        Sentix AI analyzes Twitter comments using a trained machine-learning model and classifies sentiment as 
+                        <span class="text-positive">Positive</span>, 
+                        <span class="text-negative">Negative</span>, 
+                        <span class="text-neutral">Neutral</span>, or 
+                        <span class="text-irrelevant">Irrelevant</span> in real time.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#analyzer" class="btn btn-primary btn-lg">
+                            <span>Analyze a Comment</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="#about-model" class="btn btn-outline btn-lg">Explore the Model</a>
+                    </div>
+                    <div class="hero-stats-mini">
+                        <div class="stat-item">
+                            <span class="stat-number">74K+</span>
+                            <span class="stat-label">Training Tweets</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">20K</span>
+                            <span class="stat-label">TF-IDF Features</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Sentiment Classes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="visual-card">
+                        <div class="visual-header">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                            <span class="visual-title">sentix_inference_matrix.sys</span>
+                        </div>
+                        <div class="visual-canvas">
+                            <div class="radar-circle"></div>
+                            <div class="signal-line line-1"></div>
+                            <div class="signal-line line-2"></div>
+                            
+                            <div class="sentiment-node node-pos">
+                                <span class="node-icon">🟢</span>
+                                <span class="node-text">POSITIVE 87.4%</span>
+                            </div>
+                            <div class="sentiment-node node-neu">
+                                <span class="node-icon">⚪</span>
+                                <span class="node-text">NEUTRAL</span>
+                            </div>
+                            <div class="sentiment-node node-neg">
+                                <span class="node-icon">🔴</span>
+                                <span class="node-text">NEGATIVE</span>
+                            </div>
+
+                            <div class="tweet-stream-card">
+                                <div class="stream-avatar"></div>
+                                <div class="stream-content">
+                                    <span class="stream-user">@twitter_user</span>
+                                    <p class="stream-text">"This new product launch is absolutely incredible! 🚀"</p>
+                                    <div class="stream-tag pos">Positive Signal Detected</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN SENTIMENT ANALYZER SECTION -->
+        <section class="analyzer-section" id="analyzer">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Sentiment Analyzer</h2>
+                    <p class="section-subtitle">Enter any Twitter comment to run it through the trained AI sentiment model.</p>
+                </div>
+
+                <div class="analyzer-card">
+                    <div class="analyzer-input-wrapper">
+                        <div class="input-header">
+                            <label for="tweet-input" class="input-label">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                Tweet Comment Text
+                            </label>
+                            <span class="char-counter" id="char-counter">0 / 280</span>
+                        </div>
+                        <textarea 
+                            id="tweet-input" 
+                            class="analyzer-textarea" 
+                            placeholder="Paste a Twitter comment here (e.g. 'This update is breathtaking, super smooth performance!')..."
+                            maxlength="280"
+                            rows="4"
+                        ></textarea>
+                        
+                        <div class="input-controls">
+                            <div class="sample-pills-inline">
+                                <span class="sample-label">Try sample:</span>
+                                <button type="button" class="pill-sample" data-sample="Absolutely loved this update! What an amazing experience and super smooth performance.">Positive</button>
+                                <button type="button" class="pill-sample" data-sample="This is honestly disappointing and frustrating. Terrible support.">Negative</button>
+                                <button type="button" class="pill-sample" data-sample="The new patch notes were released yesterday on the main blog.">Neutral</button>
+                                <button type="button" class="pill-sample" data-sample="Check out the stream live right now on twitch.">Irrelevant</button>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="btn btn-ghost" id="btn-clear">Clear</button>
+                                <button type="button" class="btn btn-primary" id="btn-analyze">
+                                    <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                                    <span>Analyze Sentiment</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ERROR MESSAGE BANNER -->
+                    <div class="error-banner hidden" id="error-banner">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        <span id="error-message">Please enter a comment to analyze.</span>
+                    </div>
+
+                    <!-- LOADING STATE -->
+                    <div class="loading-state hidden" id="loading-state">
+                        <div class="loading-spinner"></div>
+                        <p class="loading-title">Analyzing sentiment...</p>
+                        <p class="loading-subtitle">Cleaning text & running TF-IDF feature extraction through trained classifier</p>
+                    </div>
+
+                    <!-- PREDICTION RESULT PANEL -->
+                    <div class="result-panel hidden" id="result-panel">
+                        <div class="result-header">
+                            <div class="result-badge-container">
+                                <span class="result-label-mini">PREDICTED SENTIMENT</span>
+                                <div class="sentiment-result-badge" id="result-badge">
+                                    <span class="badge-icon" id="badge-icon">🟢</span>
+                                    <span class="badge-text" id="badge-text">POSITIVE</span>
+                                </div>
+                            </div>
+                            <div class="confidence-pill" id="confidence-pill">
+                                <span class="confidence-val" id="confidence-val">87.4%</span>
+                                <span class="confidence-label">Confidence</span>
+                            </div>
+                        </div>
+
+                        <div class="result-grid">
+                            <div class="distribution-card">
+                                <h4 class="card-mini-title">Sentiment Probability Distribution</h4>
+                                <div class="distribution-bars" id="distribution-bars">
+                                    <!-- Dynamic Bars inserted via JS -->
+                                </div>
+                            </div>
+
+                            <div class="explanation-card">
+                                <h4 class="card-mini-title">Model Decision Details</h4>
+                                <div class="detail-row">
+                                    <span class="detail-label">Cleaned Input:</span>
+                                    <span class="detail-value text-mono" id="detail-cleaned-text">"..."</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Classifier:</span>
+                                    <span class="detail-value" id="detail-model-name">Logistic Regression (TF-IDF)</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Vocabulary Match:</span>
+                                    <span class="detail-value">20,000 max TF-IDF features</span>
+                                </div>
+                                <p class="explanation-text" id="explanation-text">
+                                    The trained machine learning model classified this comment as Positive based on textual feature vectors extracted from training data.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="result-actions">
+                            <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-result">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                <span>Copy Result</span>
+                            </button>
+                            <button type="button" class="btn btn-ghost btn-sm" id="btn-reset">Analyze Another Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS SECTION -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-subtitle">A transparent 3-step sentiment prediction pipeline.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div class="step-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </div>
+                        <h3 class="step-title">1. Enter Comment</h3>
+                        <p class="step-desc">Paste or type any Twitter comment into the analyzer field. The text is passed securely to the backend engine.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div class="step-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                        </div>
+                        <h3 class="step-title">2. Preprocess & Vectorize</h3>
+                        <p class="step-desc">The text undergoes lowercasing, URL/mention stripping, and TF-IDF n-gram vectorization matching the exact training pipeline.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div class="step-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <h3 class="step-title">3. Model Inference</h3>
+                        <p class="step-desc">The trained machine learning classifier evaluates feature weights to calculate exact probabilities for Positive, Negative, Neutral, or Irrelevant sentiment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODEL INFORMATION SECTION -->
+        <section class="about-model" id="about-model">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">About the Model</h2>
+                    <p class="section-subtitle">Inspected directly from the project dataset and training notebook.</p>
+                </div>
+
+                <div class="model-info-grid">
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-icon">⚡</span>
+                            <h4>Model Architecture</h4>
+                        </div>
+                        <p id="info-model-type">Logistic Regression with TF-IDF Vectorization</p>
+                        <span class="info-badge">High Performance</span>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-icon">📊</span>
+                            <h4>Dataset Info</h4>
+                        </div>
+                        <p id="info-dataset-name">Twitter Entity Sentiment Analysis</p>
+                        <span class="info-subtext" id="info-samples">74,682 training samples</span>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-icon">🎯</span>
+                            <h4>Sentiment Classes</h4>
+                        </div>
+                        <div class="class-chips">
+                            <span class="chip pos">Positive</span>
+                            <span class="chip neg">Negative</span>
+                            <span class="chip neu">Neutral</span>
+                            <span class="chip irr">Irrelevant</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span class="info-icon">🔤</span>
+                            <h4>Text Preprocessing</h4>
+                        </div>
+                        <ul class="prep-list">
+                            <li>Lowercasing & Whitespace Trimming</li>
+                            <li>URL stripping (http/https/www)</li>
+                            <li>User mention removal (@user)</li>
+                            <li>Hashtag cleaning (#word &rarr; word)</li>
+                            <li>Punctuation & Digit stripping</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD & HISTORY SECTION -->
+        <section class="dashboard-section" id="dashboard">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Session Insights & History</h2>
+                    <p class="section-subtitle">Real-time statistics of comments analyzed during your current browsing session.</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">Total Analyzed</span>
+                        <span class="metric-value" id="stat-total">0</span>
+                    </div>
+                    <div class="metric-card border-pos">
+                        <span class="metric-label">Positive</span>
+                        <span class="metric-value text-positive" id="stat-pos">0</span>
+                    </div>
+                    <div class="metric-card border-neu">
+                        <span class="metric-label">Neutral</span>
+                        <span class="metric-value text-neutral" id="stat-neu">0</span>
+                    </div>
+                    <div class="metric-card border-neg">
+                        <span class="metric-label">Negative</span>
+                        <span class="metric-value text-negative" id="stat-neg">0</span>
+                    </div>
+                    <div class="metric-card border-irr">
+                        <span class="metric-label">Irrelevant</span>
+                        <span class="metric-value text-irrelevant" id="stat-irr">0</span>
+                    </div>
+                </div>
+
+                <!-- HISTORY TABLE CARD -->
+                <div class="history-card">
+                    <div class="history-header">
+                        <h3>Recent Analysis History</h3>
+                        <button type="button" class="btn btn-ghost btn-xs" id="btn-clear-history">Clear History</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Comment</th>
+                                    <th>Prediction</th>
+                                    <th>Confidence</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                                <tr class="empty-row">
+                                    <td colspan="4" class="text-center">No comments analyzed in this session yet. Try analyzing a tweet above!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="brand-name">Sentix<span class="brand-accent">AI</span></span>
+                <p>Twitter Sentiment Intelligence System powered by Machine Learning.</p>
+            </div>
+            <div class="footer-meta">
+                <span class="meta-tag">Python Flask</span>
+                <span class="meta-tag">scikit-learn</span>
+                <span class="meta-tag">TF-IDF Vectorizer</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
