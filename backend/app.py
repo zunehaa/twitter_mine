@@ -5,7 +5,10 @@ import time
 import joblib
 from flask import Flask, request, jsonify, send_from_directory
 
-app = Flask(__name__, static_folder="../frontend", static_url_path="")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "frontend"))
+
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
 
 # Global variables for model artifacts
 MODEL = None
@@ -27,7 +30,7 @@ def clean_text(text):
 
 def load_artifacts():
     global MODEL, VECTORIZER, LABEL_ENCODER, METADATA
-    artifacts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "model_artifacts"))
+    artifacts_dir = os.path.abspath(os.path.join(BASE_DIR, "..", "model_artifacts"))
     
     model_path = os.path.join(artifacts_dir, "model.pkl")
     vectorizer_path = os.path.join(artifacts_dir, "vectorizer.pkl")
@@ -57,7 +60,10 @@ def index():
 
 @app.route("/<path:path>")
 def static_proxy(path):
-    if os.path.exists(os.path.join(app.static_folder, path)):
+    if path.startswith("api/"):
+        return jsonify({"error": "API endpoint not found"}), 404
+    file_path = os.path.join(app.static_folder, path)
+    if os.path.exists(file_path) and os.path.isfile(file_path):
         return send_from_directory(app.static_folder, path)
     return send_from_directory(app.static_folder, "index.html")
 
